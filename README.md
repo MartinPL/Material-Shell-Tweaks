@@ -1,6 +1,6 @@
 # Material Shell Tweaks
 
-Bunch of personal tweak for [Material Shell](https://github.com/material-shell/material-shell)
+Bunch of personal tweaks for [Material Shell](https://github.com/material-shell/material-shell).  
 Works after reload. Don't report upstream bug when on.
 
 * top bar change workspace on scroll
