@@ -1,19 +1,28 @@
 const { Clutter, Meta } = imports.gi;
 const Main = imports.ui.main;
 const ExtensionManager = Main.extensionManager;
-const materialShell = ExtensionManager.lookup('material-shell@papyelgringo');
-const { TileableItem } = materialShell.imports.src.widget.taskBar;
-const { MsWorkspaceActor } = materialShell.imports.src.layout.msWorkspace.msWorkspace; 
 
 function enable() {
+	if (Main.layoutManager._startingUp) {
+		this._startupComplete = Main.layoutManager.connect('startup-complete', () => {
+			startup();
+			Main.layoutManager.disconnect(this._startupComplete);
+		});
+	} else {
+		startup();
+	}
+}
+
+function startup() {
+	materialShell = ExtensionManager.lookup('material-shell@papyelgringo');
 	fixedTaskbarItem();
 	topBarScroll();
-
 	Main.panel._oldChangeMenu = Main.panel.menuManager._changeMenu;
 	Main.panel.menuManager._changeMenu = () => {};
 }
 
 function fixedTaskbarItem() {
+	const { TileableItem } = materialShell.imports.src.widget.taskBar;
 	TileableItem.prototype.setStyle = function() {
 		if(!this.title.natural_width) {
 			this.title.natural_width = 160;
@@ -30,6 +39,7 @@ function fixedTaskbarItem() {
 }
 
 function topBarScroll() { 
+	const { MsWorkspaceActor } = materialShell.imports.src.layout.msWorkspace.msWorkspace; 
 	MsWorkspaceActor.prototype.updateUI = function () { 
 		const monitorInFullScreen = global.display.get_monitor_in_fullscreen(this.msWorkspace.monitor.index);
 		if (this.panel) {
