@@ -1,0 +1,9 @@
+{
+	"name": "Material Shell Tweaks",
+	"description": "Bunch of tweaks",
+	"shell-version": [
+		"3.38"
+	],
+	"uuid": "material-shell-tweaks@selfmade.pl",
+	"version": 1
+}
