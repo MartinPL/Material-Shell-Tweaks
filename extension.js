@@ -36,6 +36,15 @@ function fixedTaskbarItem() {
 			this.title.show();
 		}
 	}
+
+	TileableItem.prototype.updateTitle = function() {
+		if (this.style == 'full') {
+			this.title.text = this.tileable.title;
+		} else if (this.style == 'name') {
+			this.title.text = this.app.get_name();
+		}
+	}
+
 }
 
 function topBarScroll() { 
