@@ -1,2 +1,2 @@
-#msPanel, #horizontalPanel { box-shadow: none }
-.mat-button.primary { background: none }
+#msPanel, #horizontalPanel { box-shadow: none !important }
+.mat-button.primary { background: none !important }
